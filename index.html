@@ -1,1 +1,429 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comercial Lucente | Agente Autorizado Movistar</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            primary: '#0045A5',
+                            secondary: '#D32F2F',
+                            accent: '#00A3E0',
+                            dark: '#0B1120',
+                            card: '#1E293B'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-brand-dark text-slate-100 font-sans antialiased min-h-screen flex flex-col justify-between selection:bg-brand-accent selection:text-white">
+
+    <!-- HEADER SUPERIOR -->
+    <header class="sticky top-0 z-40 bg-brand-dark/90 backdrop-blur-md border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+            <!-- Logo Aislado (Sin cajas contenedoras) y Nombre -->
+            <a href="#" class="flex items-center gap-3.5 group">
+                <img src="1000590224.jpg" 
+                     alt="Comercial Lucente" 
+                     class="h-12 sm:h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105" 
+                     style="image-rendering: -webkit-optimize-contrast;"
+                     onerror="this.onerror=null; this.src='https://via.placeholder.com/150/0045A5/FFFFFF?text=LUCENTE';">
+                <div>
+                    <h1 class="font-bold text-base sm:text-lg tracking-tight text-white leading-tight">
+                        Comercial Lucente
+                    </h1>
+                    <span class="inline-flex items-center gap-1 text-xs font-semibold text-brand-accent">
+                        <i class="fa-solid fa-circle-check text-[10px]"></i> Agente Autorizado Movistar
+                    </span>
+                </div>
+            </a>
+
+            <!-- Botón Contacto Rápido -->
+            <a id="header-wa-btn" href="#" target="_blank" class="hidden sm:inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-4 py-2.5 rounded-xl transition-all shadow-md shadow-emerald-900/30 hover:scale-[1.02]">
+                <i class="fa-brands fa-whatsapp text-lg"></i>
+                <span class="text-sm">Atención Directa</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <!-- HERO BANNER -->
+        <section class="relative overflow-hidden bg-gradient-to-b from-brand-primary/20 via-brand-dark to-brand-dark py-12 sm:py-16 border-b border-slate-800/80">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+                <span class="inline-block px-3 py-1 rounded-full bg-brand-primary/30 border border-brand-primary/50 text-brand-accent text-xs font-bold uppercase tracking-wider mb-4">
+                    Equipos Celulares & Tecnología
+                </span>
+                <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight max-w-3xl mx-auto leading-tight">
+                    Conéctate al futuro con los mejores smartphones
+                </h2>
+                <p class="mt-4 text-slate-400 text-sm sm:text-base max-w-2xl mx-auto">
+                    Catálogo actualizado de dispositivos homologados, accesorios originales y servicios de telefonía. Compra directa y rápida a través de WhatsApp.
+                </p>
+
+                <!-- Badges de Confianza -->
+                <div class="mt-8 flex flex-wrap items-center justify-center gap-4 text-xs sm:text-sm text-slate-300">
+                    <div class="flex items-center gap-2 bg-slate-800/60 px-3.5 py-2 rounded-lg border border-slate-700/50">
+                        <i class="fa-solid fa-shield-halved text-brand-accent"></i> Garantía Oficial
+                    </div>
+                    <div class="flex items-center gap-2 bg-slate-800/60 px-3.5 py-2 rounded-lg border border-slate-700/50">
+                        <i class="fa-solid fa-truck-fast text-brand-accent"></i> Envíos Seguros
+                    </div>
+                    <div class="flex items-center gap-2 bg-slate-800/60 px-3.5 py-2 rounded-lg border border-slate-700/50">
+                        <i class="fa-solid fa-sim-card text-brand-accent"></i> Líneas y Chips Movistar
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FILTROS Y BUSCADOR -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="flex flex-col md:flex-row gap-4 items-center justify-between mb-8">
+                <!-- Buscador -->
+                <div class="relative w-full md:w-80">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                    <input type="text" id="search-input" placeholder="Buscar modelo, marca o accesorios..." class="w-full bg-slate-800/80 border border-slate-700 text-white placeholder-slate-400 text-sm rounded-xl pl-10 pr-4 py-2.5 focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition-all">
+                </div>
+
+                <!-- Botones Categorías -->
+                <div class="w-full md:w-auto overflow-x-auto no-scrollbar flex items-center gap-2 pb-2 md:pb-0" id="category-buttons">
+                    <!-- Dinámico vía JS -->
+                </div>
+            </div>
+
+            <!-- GRID DE PRODUCTOS -->
+            <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <!-- Cargado dinámicamente -->
+            </div>
+
+            <!-- EMPTY STATE -->
+            <div id="empty-state" class="hidden text-center py-16">
+                <div class="w-16 h-16 bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-4 text-slate-500 text-2xl">
+                    <i class="fa-solid fa-box-open"></i>
+                </div>
+                <h3 class="text-lg font-bold text-white mb-1">No encontramos resultados</h3>
+                <p class="text-slate-400 text-sm">Intenta buscar con otros términos o cambia la categoría seleccionada.</p>
+            </div>
+        </section>
+
+        <!-- SECCIÓN CÓMO COMPRAR -->
+        <section class="border-t border-slate-800/80 bg-slate-900/50 py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h3 class="text-xl font-bold text-center text-white mb-8">¿Cómo realizar tu compra?</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                    <div class="p-5 bg-brand-card rounded-2xl border border-slate-800">
+                        <div class="w-10 h-10 bg-brand-primary/20 text-brand-accent rounded-xl flex items-center justify-center font-bold mx-auto mb-3 text-lg">1</div>
+                        <h4 class="font-semibold text-white mb-1">Elige tu equipo</h4>
+                        <p class="text-xs text-slate-400">Explora nuestro catálogo digital y selecciona el dispositivo o accesorio ideal.</p>
+                    </div>
+                    <div class="p-5 bg-brand-card rounded-2xl border border-slate-800">
+                        <div class="w-10 h-10 bg-brand-primary/20 text-brand-accent rounded-xl flex items-center justify-center font-bold mx-auto mb-3 text-lg">2</div>
+                        <h4 class="font-semibold text-white mb-1">Consulta Disponibilidad</h4>
+                        <p class="text-xs text-slate-400">Haz clic en "Comprar por WhatsApp" para enviar la solicitud directa a un asesor.</p>
+                    </div>
+                    <div class="p-5 bg-brand-card rounded-2xl border border-slate-800">
+                        <div class="w-10 h-10 bg-brand-primary/20 text-brand-accent rounded-xl flex items-center justify-center font-bold mx-auto mb-3 text-lg">3</div>
+                        <h4 class="font-semibold text-white mb-1">Concreta tu Pedido</h4>
+                        <p class="text-xs text-slate-400">Coordina el pago, plan Movistar o método de envío/entrega directamente.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-950 border-t border-slate-800 py-8 text-xs text-slate-400">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+            <div>
+                <p class="font-semibold text-slate-200">Comercial Lucente</p>
+                <p class="mt-0.5">Agente Autorizado Movistar | Venta de Equipos Celulares y Tecnología</p>
+            </div>
+            <p>© 2026 Comercial Lucente. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- BOTÓN FLOTANTE WHATSAPP -->
+    <a id="floating-wa-btn" href="#" target="_blank" class="fixed bottom-6 right-6 z-50 bg-emerald-500 hover:bg-emerald-400 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-xl shadow-emerald-950/50 hover:scale-110 transition-all group">
+        <i class="fa-brands fa-whatsapp text-3xl"></i>
+        <span class="absolute right-16 bg-slate-900 text-white text-xs px-3 py-1.5 rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none border border-slate-700 shadow-md">
+            ¡Chatea con nosotros!
+        </span>
+    </a>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // 1. CONFIGURACIÓN GENERAL
+        const PHONE_NUMBER = "584247631450";
+        // Poner aquí el ID del Sheet de Google cuando esté listo (Ejemplo: '1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms')
+        const GOOGLE_SHEET_ID = ""; 
+        const SHEET_NAME = "Hoja1";
+
+        // 2. DATOS LOCALES DE RESPALDO (SE USAN SI NO HAY GOOGLE SHEET CONECTADO)
+        const localProducts = [
+            {
+                name: "Samsung Galaxy S24 Ultra",
+                category: "Smartphones",
+                price: "1050",
+                stock: "Disponible",
+                specs: "256GB / 12GB RAM / Cámara 200MP",
+                image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                name: "iPhone 15 Pro Max",
+                category: "Smartphones",
+                price: "1190",
+                stock: "Pocas Unidades",
+                specs: "256GB / Titanium / Chip A17 Pro",
+                image: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                name: "Xiaomi Redmi Note 13 Pro+",
+                category: "Smartphones",
+                price: "380",
+                stock: "Disponible",
+                specs: "512GB / 12GB RAM / 120W Carga",
+                image: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                name: "Honor Magic6 Lite 5G",
+                category: "Smartphones",
+                price: "290",
+                stock: "Disponible",
+                specs: "256GB / Pantalla Ultra Resistente",
+                image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                name: "Router Móvil Wi-Fi ZTE Movistar 4G",
+                category: "Equipos Movistar",
+                price: "45",
+                stock: "Disponible",
+                specs: "Batería 3000mAh / Conecta 10 equipos",
+                image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                name: "Audífonos Redmi Buds 5 Pro",
+                category: "Accesorios",
+                price: "42",
+                stock: "Disponible",
+                specs: "Cancelación de Ruido / Bluetooth 5.3",
+                image: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=600&q=80"
+            }
+        ];
+
+        // ESTADO GLOBAL
+        let products = [];
+        let categories = ["Todos"];
+        let selectedCategory = "Todos";
+        let searchQuery = "";
+
+        // INICIALIZACIÓN
+        document.addEventListener("DOMContentLoaded", async () => {
+            setupWhatsAppLinks();
+            renderSkeleton();
+            await loadCatalog();
+
+            document.getElementById("search-input").addEventListener("input", (e) => {
+                searchQuery = e.target.value.toLowerCase().trim();
+                renderProducts();
+            });
+        });
+
+        // ENLACES GENERALES WHATSAPP (UNICODE UNIFICADO)
+        function setupWhatsAppLinks() {
+            // \uD83D\uDCF1 = 📱
+            const rawMsg = "Hola Comercial Lucente! \uD83D\uDCF1 Vengo de la vitrina web y me gustaría obtener información sobre sus equipos y servicios Movistar.";
+            const waUrl = `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(rawMsg)}`;
+            
+            document.getElementById("header-wa-btn").href = waUrl;
+            document.getElementById("floating-wa-btn").href = waUrl;
+        }
+
+        // CARGA DESDE GOOGLE SHEETS CON FALLBACK
+        async function loadCatalog() {
+            if (GOOGLE_SHEET_ID && GOOGLE_SHEET_ID.trim() !== "") {
+                try {
+                    const sheetUrl = `https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_NAME)}`;
+                    const response = await fetch(sheetUrl);
+                    const csvText = await response.text();
+                    products = parseCSV(csvText);
+                } catch (error) {
+                    console.warn("No se pudo cargar Google Sheets, usando respaldo local:", error);
+                    products = localProducts;
+                }
+            } else {
+                products = localProducts;
+            }
+
+            // Extraer categorías únicas
+            const uniqueCats = [...new Set(products.map(p => p.category).filter(Boolean))];
+            categories = ["Todos", ...uniqueCats];
+
+            renderCategoryButtons();
+            renderProducts();
+        }
+
+        // PARSER CSV DE GOOGLE SHEETS
+        function parseCSV(text) {
+            const lines = text.split('\n').filter(l => l.trim() !== '');
+            if (lines.length < 2) return localProducts;
+
+            const headers = lines[0].split(',').map(h => h.replace(/^"(.*)"$/, '$1').trim().toLowerCase());
+            
+            return lines.slice(1).map(line => {
+                const values = line.match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g) || line.split(',');
+                const cleanValues = values.map(v => v.replace(/^"(.*)"$/, '$1').trim());
+                
+                let item = {};
+                headers.forEach((h, i) => {
+                    item[h] = cleanValues[i] || '';
+                });
+
+                return {
+                    name: item.nombre || item.name || "Producto sin nombre",
+                    category: item.categoria || item.category || "General",
+                    price: item.precio || item.price || "0",
+                    stock: item.stock || "Disponible",
+                    specs: item.especificaciones || item.specs || item.descripcion || "",
+                    image: item.imagen || item.image || "https://via.placeholder.com/400x300/1E293B/FFFFFF?text=Producto"
+                };
+            });
+        }
+
+        // PANTALLA DE CARGA (SKELETON)
+        function renderSkeleton() {
+            const grid = document.getElementById("products-grid");
+            grid.innerHTML = Array(4).fill(0).map(() => `
+                <div class="bg-brand-card rounded-2xl border border-slate-800 p-4 animate-pulse">
+                    <div class="h-48 bg-slate-800 rounded-xl mb-4"></div>
+                    <div class="h-4 bg-slate-800 rounded w-3/4 mb-2"></div>
+                    <div class="h-3 bg-slate-800 rounded w-1/2 mb-4"></div>
+                    <div class="h-10 bg-slate-800 rounded-xl"></div>
+                </div>
+            `).join("");
+        }
+
+        // BOTONES DE CATEGORÍAS
+        function renderCategoryButtons() {
+            const container = document.getElementById("category-buttons");
+            container.innerHTML = categories.map(cat => `
+                <button 
+                    onclick="filterCategory('${cat}')"
+                    class="px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
+                        selectedCategory === cat 
+                        ? 'bg-brand-primary text-white shadow-md shadow-brand-primary/30' 
+                        : 'bg-slate-800/80 text-slate-300 hover:bg-slate-700/80 border border-slate-700/50'
+                    }"
+                >
+                    ${cat}
+                </button>
+            `).join("");
+        }
+
+        function filterCategory(cat) {
+            selectedCategory = cat;
+            renderCategoryButtons();
+            renderProducts();
+        }
+
+        // GENERAR ENLACE DE COMPRA INDIVIDUAL POR PRODUCTO (UNICODE SEGURO)
+        function getBuyLink(product) {
+            // \uD83D\uDCF1 = 📱 | \u25C6 = ◆
+            const rawMessage = `Hola Comercial Lucente! \uD83D\uDCF1 Vengo de la vitrina web y quiero consultar el siguiente equipo:\n\n\u25C6 *Producto:* ${product.name}\n\u25C6 *Precio:* $${product.price}\n\u25C6 *Detalles:* ${product.specs}\n\n\u00BFTienen disponibilidad para coordinar la compra?`;
+            return `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(rawMessage)}`;
+        }
+
+        // RENDERIZAR GRILLA DE PRODUCTOS
+        function renderProducts() {
+            const grid = document.getElementById("products-grid");
+            const emptyState = document.getElementById("empty-state");
+
+            const filtered = products.filter(p => {
+                const matchesCat = selectedCategory === "Todos" || p.category === selectedCategory;
+                const matchesSearch = p.name.toLowerCase().includes(searchQuery) || 
+                                      p.specs.toLowerCase().includes(searchQuery) ||
+                                      p.category.toLowerCase().includes(searchQuery);
+                return matchesCat && matchesSearch;
+            });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = "";
+                emptyState.classList.remove("hidden");
+                return;
+            }
+
+            emptyState.classList.add("hidden");
+            grid.innerHTML = filtered.map(p => `
+                <article class="bg-brand-card rounded-2xl overflow-hidden border border-slate-800 flex flex-col justify-between hover:border-slate-700 transition-all group">
+                    <div>
+                        <!-- IMAGEN -->
+                        <div class="relative h-48 w-full bg-slate-900 overflow-hidden">
+                            <img 
+                                src="${p.image}" 
+                                alt="${p.name}" 
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                onerror="this.onerror=null; this.src='https://via.placeholder.com/400x300/1E293B/FFFFFF?text=Producto';"
+                            >
+                            <span class="absolute top-3 left-3 bg-brand-dark/80 backdrop-blur-md text-brand-accent text-[10px] font-bold px-2.5 py-1 rounded-md border border-slate-700">
+                                ${p.category}
+                            </span>
+                        </div>
+
+                        <!-- DETALLES -->
+                        <div class="p-4">
+                            <h4 class="font-bold text-white text-base leading-snug group-hover:text-brand-accent transition-colors">
+                                ${p.name}
+                            </h4>
+                            <p class="text-xs text-slate-400 mt-1 line-clamp-2">
+                                ${p.specs}
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- PRECIO Y ACCIÓN -->
+                    <div class="p-4 pt-0 border-t border-slate-800/60 mt-3 flex flex-col gap-3">
+                        <div class="flex items-baseline justify-between mt-3">
+                            <span class="text-xs text-emerald-400 font-medium">
+                                <i class="fa-solid fa-circle text-[8px] mr-1"></i>${p.stock}
+                            </span>
+                            <span class="text-xl font-extrabold text-white">
+                                $${p.price}
+                            </span>
+                        </div>
+
+                        <a 
+                            href="${getBuyLink(p)}" 
+                            target="_blank"
+                            class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 transition-all shadow-md shadow-emerald-950/30"
+                        >
+                            <i class="fa-brands fa-whatsapp text-base"></i>
+                            Comprar por WhatsApp
+                        </a>
+                    </div>
+                </article>
+            `).join("");
+        }
+    </script>
+</body>
+</html>
 
