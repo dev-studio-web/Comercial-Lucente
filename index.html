@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Colusa  | Agente Autorizado Movistar</title>
+    <title>Comercial Lucente | Agente Autorizado Movistar</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -40,18 +40,18 @@
 </head>
 <body class="bg-brand-dark text-slate-100 font-sans antialiased min-h-screen flex flex-col justify-between selection:bg-brand-accent selection:text-white">
 
-        <!-- HEADER SUPERIOR (Fondo Blanco Corporativo) -->
+    <!-- HEADER SUPERIOR (Blanco Corporativo) -->
     <header class="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
-            <!-- Logo-->
+            <!-- Logo solo (Aislado, sin texto al lado) -->
             <a href="#" class="flex items-center group">
-                <img src="Img/logolucente.jpg"
+                <img src="img/logolucente.jpg" 
                      alt="Comercial Lucente" 
                      class="h-10 sm:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105" 
                      onerror="this.onerror=null; this.src='https://via.placeholder.com/200x60/0045A5/FFFFFF?text=Comercial+Lucente';">
             </a>
 
-            <!-- Distintivo Movistar Adaptado a Fondo Claro -->
+            <!-- Agente Autorizado Movistar (Alineado a la derecha) -->
             <div class="flex items-center gap-2 bg-sky-50 border border-sky-200 text-brand-primary px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-bold shadow-sm">
                 <i class="fa-solid fa-circle-check text-brand-accent text-[11px]"></i>
                 <span>Agente Autorizado Movistar</span>
@@ -59,49 +59,50 @@
         </div>
     </header>
 
-
     <main class="flex-grow">
         <!-- HERO BANNER -->
-        <section class="relative overflow-hidden bg-gradient-to-b from-brand-primary/20 via-brand-dark to-brand-dark py-12 sm:py-16 border-b border-slate-800/80">
+        <section class="relative overflow-hidden bg-gradient-to-b from-brand-primary/20 via-brand-dark to-brand-dark py-10 sm:py-14 border-b border-slate-800/80">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
                 <span class="inline-block px-3 py-1 rounded-full bg-brand-primary/30 border border-brand-primary/50 text-brand-accent text-xs font-bold uppercase tracking-wider mb-4">
-                    Venta de Líneas Movistar y Recarga de saldo
+                    Venta de Líneas Movistar y Recargas 
                 </span>
                 <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight max-w-3xl mx-auto leading-tight">
                     Lo mejor en Tecnología
                 </h2>
                 <p class="mt-4 text-slate-400 text-sm sm:text-base max-w-2xl mx-auto">
-                     Equipos célulares y accesorios. Compra directa y rápida a través de WhatsApp.
+                    Equipos celulares, accesorios y servicios de telefonía. Compra directa y rápida a través de WhatsApp.
                 </p>
 
-                <!-- Badges de Confianza  -->
+                <!-- Badges de Confianza -->
                 <div class="mt-8 flex flex-wrap items-center justify-center gap-4 text-xs sm:text-sm text-slate-300">
                     <div class="flex items-center gap-2 bg-slate-800/60 px-3.5 py-2 rounded-lg border border-slate-700/50">
-                        <i class="fa-solid fa-shield-halved text-brand-accent"></i> Recuperación de líneas 
+                        <i class="fa-solid fa-shield-halved text-brand-accent"></i> Recuperación de líneas
                     </div>
                     <div class="flex items-center gap-2 bg-slate-800/60 px-3.5 py-2 rounded-lg border border-slate-700/50">
-                        <i class="fa-solid fa-sim-card text-brand-accent"></i> ESIM y SimCard 
+                        <i class="fa-solid fa-sim-card text-brand-accent"></i> SimCard, eSIM y Recargas
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- FILTROS Y BUSCADOR -->
-        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <div class="flex flex-col md:flex-row gap-4 items-center justify-between mb-8">
+        <!-- BARRA DE FILTROS Y CATEGORÍAS FIJA (STICKY AL HACER SCROLL) -->
+        <div class="sticky top-20 z-30 bg-brand-dark/95 backdrop-blur-md border-b border-slate-800/80 shadow-lg py-3">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row gap-3 items-center justify-between">
                 <!-- Buscador -->
                 <div class="relative w-full md:w-80">
                     <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
-                    <input type="text" id="search-input" placeholder="Buscar modelo, marca o accesorios..." class="w-full bg-slate-800/80 border border-slate-700 text-white placeholder-slate-400 text-sm rounded-xl pl-10 pr-4 py-2.5 focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition-all">
+                    <input type="text" id="search-input" placeholder="Buscar modelo, marca o accesorios..." class="w-full bg-slate-800/90 border border-slate-700 text-white placeholder-slate-400 text-sm rounded-xl pl-10 pr-4 py-2 focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition-all">
                 </div>
 
                 <!-- Botones Categorías -->
-                <div class="w-full md:w-auto overflow-x-auto no-scrollbar flex items-center gap-2 pb-2 md:pb-0" id="category-buttons">
-                    <!-- Dinámico vía JS -->
+                <div class="w-full md:w-auto overflow-x-auto no-scrollbar flex items-center gap-2 py-1" id="category-buttons">
+                    <!-- Cargado dinámicamente -->
                 </div>
             </div>
+        </div>
 
-            <!-- GRID DE PRODUCTOS -->
+        <!-- GRID DE PRODUCTOS -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 <!-- Cargado dinámicamente -->
             </div>
@@ -123,8 +124,8 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
                     <div class="p-5 bg-brand-card rounded-2xl border border-slate-800">
                         <div class="w-10 h-10 bg-brand-primary/20 text-brand-accent rounded-xl flex items-center justify-center font-bold mx-auto mb-3 text-lg">1</div>
-                        <h4 class="font-semibold text-white mb-1">Elige tu equipo</h4>
-                        <p class="text-xs text-slate-400">Explora nuestro catálogo digital y selecciona el dispositivo o accesorio ideal.</p>
+                        <h4 class="font-semibold text-white mb-1">Elige tu equipo o servicio</h4>
+                        <p class="text-xs text-slate-400">Explora nuestro catálogo digital y selecciona el dispositivo, plan o recarga ideal.</p>
                     </div>
                     <div class="p-5 bg-brand-card rounded-2xl border border-slate-800">
                         <div class="w-10 h-10 bg-brand-primary/20 text-brand-accent rounded-xl flex items-center justify-center font-bold mx-auto mb-3 text-lg">2</div>
@@ -134,7 +135,7 @@
                     <div class="p-5 bg-brand-card rounded-2xl border border-slate-800">
                         <div class="w-10 h-10 bg-brand-primary/20 text-brand-accent rounded-xl flex items-center justify-center font-bold mx-auto mb-3 text-lg">3</div>
                         <h4 class="font-semibold text-white mb-1">Concreta tu Pedido</h4>
-                        <p class="text-xs text-slate-400">Coordina el pago, plan Movistar o método de envío/entrega directamente.</p>
+                        <p class="text-xs text-slate-400">Coordina el pago, plan Movistar o método de entrega directamente.</p>
                     </div>
                 </div>
             </div>
@@ -162,12 +163,11 @@
 
     <!-- JAVASCRIPT -->
     <script>
-        // CONFIGURACIÓN GENERAL
         const PHONE_NUMBER = "584247631450";
         const GOOGLE_SHEET_ID = ""; 
         const SHEET_NAME = "Hoja1";
 
-        // DATOS LOCALES DE RESPALDO
+        // Catálogo local con las nuevas categorías integradas
         const localProducts = [
             {
                 name: "Samsung Galaxy S24 Ultra",
@@ -186,28 +186,20 @@
                 image: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=600&q=80"
             },
             {
-                name: "Xiaomi Redmi Note 13 Pro+",
-                category: "Smartphones",
-                price: "380",
+                name: "Plan Movistar Plus 25GB",
+                category: "Planes Movistar",
+                price: "15",
                 stock: "Disponible",
-                specs: "512GB / 12GB RAM / 120W Carga",
-                image: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=600&q=80"
-            },
-            {
-                name: "Honor Magic6 Lite 5G",
-                category: "Smartphones",
-                price: "290",
-                stock: "Disponible",
-                specs: "256GB / Pantalla Ultra Resistente",
-                image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=600&q=80"
-            },
-            {
-                name: "Router Móvil Wi-Fi ZTE Movistar 4G",
-                category: "Equipos Movistar",
-                price: "45",
-                stock: "Disponible",
-                specs: "Batería 3000mAh / Conecta 10 equipos",
+                specs: "25GB de Navegación + Minutos y SMS Ilimitados",
                 image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                name: "Recarga de Saldo Movistar",
+                category: "Recargas",
+                price: "5",
+                stock: "Inmediato",
+                specs: "Abono directo de saldo para líneas prepago y postpago",
+                image: "https://images.unsplash.com/photo-1556742049-0a67d9834b1d?auto=format&fit=crop&w=600&q=80"
             },
             {
                 name: "Audífonos Redmi Buds 5 Pro",
@@ -219,13 +211,11 @@
             }
         ];
 
-        // ESTADO GLOBAL
         let products = [];
         let categories = ["Todos"];
         let selectedCategory = "Todos";
         let searchQuery = "";
 
-        // INICIALIZACIÓN
         document.addEventListener("DOMContentLoaded", async () => {
             setupWhatsAppLinks();
             renderSkeleton();
@@ -237,16 +227,12 @@
             });
         });
 
-        // ENLACES GENERALES WHATSAPP
         function setupWhatsAppLinks() {
-            // \uD83D\uDCF1 = 📱
             const rawMsg = "Hola Comercial Lucente! \uD83D\uDCF1 Vengo de la vitrina web y me gustaría obtener información sobre sus equipos y servicios Movistar.";
             const waUrl = `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(rawMsg)}`;
-            
             document.getElementById("floating-wa-btn").href = waUrl;
         }
 
-        // CARGA DESDE GOOGLE SHEETS CON FALLBACK
         async function loadCatalog() {
             if (GOOGLE_SHEET_ID && GOOGLE_SHEET_ID.trim() !== "") {
                 try {
@@ -255,7 +241,7 @@
                     const csvText = await response.text();
                     products = parseCSV(csvText);
                 } catch (error) {
-                    console.warn("No se pudo cargar Google Sheets, usando respaldo local:", error);
+                    console.warn("Usando catálogo local:", error);
                     products = localProducts;
                 }
             } else {
@@ -269,7 +255,6 @@
             renderProducts();
         }
 
-        // PARSER CSV
         function parseCSV(text) {
             const lines = text.split('\n').filter(l => l.trim() !== '');
             if (lines.length < 2) return localProducts;
@@ -296,7 +281,6 @@
             });
         }
 
-        // SKELETON
         function renderSkeleton() {
             const grid = document.getElementById("products-grid");
             grid.innerHTML = Array(4).fill(0).map(() => `
@@ -309,7 +293,6 @@
             `).join("");
         }
 
-        // CATEGORÍAS
         function renderCategoryButtons() {
             const container = document.getElementById("category-buttons");
             container.innerHTML = categories.map(cat => `
@@ -332,14 +315,11 @@
             renderProducts();
         }
 
-        // ENLACE COMPRA INDIVIDUAL
         function getBuyLink(product) {
-            // \uD83D\uDCF1 = 📱 | \u25C6 = ◆
-            const rawMessage = `Hola Comercial Lucente! \uD83D\uDCF1 Vengo de la vitrina web y quiero consultar el siguiente equipo:\n\n\u25C6 *Producto:* ${product.name}\n\u25C6 *Precio:* $${product.price}\n\u25C6 *Detalles:* ${product.specs}\n\n\u00BFTienen disponibilidad para coordinar la compra?`;
+            const rawMessage = `Hola Comercial Lucente! \uD83D\uDCF1 Vengo de la vitrina web y quiero consultar sobre lo siguiente:\n\n\u25C6 *Producto/Servicio:* ${product.name}\n\u25C6 *Precio:* $${product.price}\n\u25C6 *Detalles:* ${product.specs}\n\n\u00BFTienen disponibilidad para realizar el pedido?`;
             return `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(rawMessage)}`;
         }
 
-        // RENDER PRODUCTOS
         function renderProducts() {
             const grid = document.getElementById("products-grid");
             const emptyState = document.getElementById("empty-state");
@@ -362,7 +342,6 @@
             grid.innerHTML = filtered.map(p => `
                 <article class="bg-brand-card rounded-2xl overflow-hidden border border-slate-800 flex flex-col justify-between hover:border-slate-700 transition-all group">
                     <div>
-                        <!-- IMAGEN -->
                         <div class="relative h-48 w-full bg-slate-900 overflow-hidden">
                             <img 
                                 src="${p.image}" 
@@ -375,7 +354,6 @@
                             </span>
                         </div>
 
-                        <!-- DETALLES -->
                         <div class="p-4">
                             <h4 class="font-bold text-white text-base leading-snug group-hover:text-brand-accent transition-colors">
                                 ${p.name}
@@ -386,7 +364,6 @@
                         </div>
                     </div>
 
-                    <!-- PRECIO Y ACCIÓN -->
                     <div class="p-4 pt-0 border-t border-slate-800/60 mt-3 flex flex-col gap-3">
                         <div class="flex items-baseline justify-between mt-3">
                             <span class="text-xs text-emerald-400 font-medium">
