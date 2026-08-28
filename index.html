@@ -85,13 +85,13 @@
                 </div>
 
                 <div class="w-full md:w-auto overflow-x-auto no-scrollbar flex items-center gap-2 py-1" id="category-buttons">
-                    </div>
+                </div>
             </div>
         </div>
 
         <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                </div>
+            </div>
 
             <div id="empty-state" class="hidden text-center py-16">
                 <div class="w-16 h-16 bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-4 text-slate-500 text-2xl">
@@ -143,91 +143,7 @@
         </span>
     </a>
 
-    <script>
-        const PHONE_NUMBER = "584247631450";
-        const GOOGLE_SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSovMeo7szQd-VrMB7-5IhX8gW08x-pQEtb7HjwPznO_X_t_QkR2KC8qfRIizVerfMt8_4EUhE6Jjx-/pub?output=csv';
-
-        // Catálogo local de respaldo por si falla la red o la hoja
-        const localProducts = [
-            {
-                name: "Samsung Galaxy S24 Ultra",
-                category: "Smartphones",
-                price: "1050",
-                stock: "Disponible",
-                specs: "256GB / 12GB RAM / Cámara 200MP",
-                image: "s24-ultra.jpg"
-            },
-            {
-                name: "iPhone 15 Pro Max",
-                category: "Smartphones",
-                price: "1190",
-                stock: "Pocas Unidades",
-                specs: "256GB / Titanium / Chip A17 Pro",
-                image: "iphone15.jpg"
-            },
-            {
-                name: "Plan Movistar Plus 25GB",
-                category: "Planes Movistar",
-                price: "15",
-                stock: "Disponible",
-                specs: "25GB de Navegación + Minutos y SMS Ilimitados",
-                image: "plan25gb.jpg"
-            },
-            {
-                name: "Recarga de Saldo Movistar",
-                category: "Recargas",
-                price: "5",
-                stock: "Inmediato",
-                specs: "Abono directo de saldo para líneas prepago y postpago",
-                image: "recarga.jpg"
-            },
-            {
-                name: "Audífonos Redmi Buds 5 Pro",
-                category: "Accesorios",
-                price: "42",
-                stock: "Disponible",
-                specs: "Cancelación de Ruido / Bluetooth 5.3",
-                image: "redmi-buds5.jpg"
-            }
-        ];
-
-        let products = [];
-        let categories = ["Todos"];
-        let selectedCategory = "Todos";
-        let searchQuery = "";
-
-        document.addEventListener("DOMContentLoaded", async () => {
-            setupWhatsAppLinks();
-            renderSkeleton();
-            await loadCatalog();
-
-            document.getElementById("search-input").addEventListener("input", (e) => {
-                searchQuery = e.target.value.toLowerCase().trim();
-                renderProducts();
-            });
-        });
-
-        function setupWhatsAppLinks() {
-            const rawMsg = "Hola Comercial Lucente! \uD83D\uDCF1 Vengo de la vitrina web y me gustaría obtener información sobre sus equipos y servicios Movistar.";
-            const waUrl = `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(rawMsg)}`;
-            document.getElementById("floating-wa-btn").href = waUrl;
-        }
-
-        // Convierte el nombre de la imagen a la carpeta local img/ si no es URL
-        function getImagePath(imgName) {
-            if (!imgName || imgName.trim() === "") {
-                return "https://via.placeholder.com/400x300/1E293B/FFFFFF?text=Sin+Imagen";
-            }
-            imgName = imgName.trim();
-            if (imgName.startsWith("http://") || imgName.startsWith("https://")) {
-                return imgName;
-            }
-            if (imgName.startsWith("img/")) {
-                return imgName;
-            }
-            return `img/${imgName}`;
-        }
-    <!-- JAVASCRIPT DEFINITIVO Y ANTIFALLOS -->
+    <!-- JAVASCRIPT CORREGIDO Y ROBUSTO -->
     <script>
         const PHONE_NUMBER = "584247631450";
         const GOOGLE_SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSovMeo7szQd-VrMB7-5IhX8gW08x-pQEtb7HjwPznO_X_t_QkR2KC8qfRIizVerfMt8_4EUhE6Jjx-/pub?output=csv';
@@ -270,15 +186,17 @@
         async function loadCatalog() {
             try {
                 const response = await fetch(GOOGLE_SHEET_URL);
-                if (!response.ok) throw new Error("Error en la respuesta de la red");
+                if (!response.ok) throw new Error("Error en la petición");
                 const csvText = await response.text();
                 products = parseCSV(csvText);
             } catch (error) {
-                console.error("Error cargando desde Google Sheets:", error);
+                console.error("Error cargando datos de Google Sheets:", error);
                 products = [];
             }
 
-            const uniqueCats = [...new Set(products.map(p => p.category).filter(c => c && String(c).trim() !== ""))];
+            // Extraer categorías únicas de la hoja
+            const rawCats = products.map(p => p.category).filter(c => c && String(c).trim() !== "");
+            const uniqueCats = [...new Set(rawCats)];
             categories = ["Todos", ...uniqueCats];
 
             renderCategoryButtons();
@@ -288,12 +206,18 @@
         function parseCSV(text) {
             if (!text || text.trim() === "") return [];
 
-            const lines = text.replace(/\r/g, '').split('\n').filter(l => l.trim() !== '');
+            // Eliminar BOM UTF-8 que suele colocar Google Sheets al publicar CSV
+            const cleanText = text.replace(/^\uFEFF/, '');
+            const lines = cleanText.replace(/\r/g, '').split('\n').filter(l => l.trim() !== '');
             if (lines.length < 2) return [];
 
-            // Detecta automáticamente si la hoja usa ';' o ',' como separador
-            const delimiter = lines[0].includes(';') ? ';' : ',';
-            const headers = splitLine(lines[0], delimiter).map(h => h.toLowerCase().trim());
+            // Detectar automáticamente si usa punto y coma (;) o coma (,)
+            const firstLine = lines[0];
+            let delimiter = ',';
+            if (firstLine.includes(';')) delimiter = ';';
+            else if (firstLine.includes('\t')) delimiter = '\t';
+
+            const headers = splitLine(firstLine, delimiter).map(h => h.toLowerCase().trim());
 
             return lines.slice(1).map(line => {
                 const values = splitLine(line, delimiter);
@@ -302,12 +226,48 @@
                     item[h] = (values[i] || '').trim();
                 });
 
-                const name = item.nombre || item.name || item.producto || item.modelo || item.equipo || "Producto";
-                const category = item.categoria || item.category || item.categoría || item.marca || item.tipo || "General";
-                const price = item.precio || item.price || item.costo || item.monto || "0";
-                const stock = item.stock || item.disponibilidad || "Disponible";
-                const specs = item.especificaciones || item.specs || item.descripcion || item.descripción || item.detalles || item.almacenamiento || "";
-                const image = item.imagen || item.image || item.foto || item.url || "";
+                const marca = item.marca || item.brand || item.marcas || "";
+                const modelo = item.modelo || item.model || "";
+
+                // Construcción inteligente del nombre
+                let name = item.nombre || item.name || item.producto || item.equipo || "";
+                if (!name) {
+                    if (marca && modelo) {
+                        name = `${marca} ${modelo}`;
+                    } else if (modelo) {
+                        name = modelo;
+                    } else if (marca) {
+                        name = marca;
+                    } else {
+                        name = "Producto";
+                    }
+                }
+
+                // Determinación de la Categoría
+                let category = item.categoria || item.category || item.categoría || item.tipo || item.seccion || item.sección || item.linea || item.línea || "";
+                if (!category) {
+                    category = marca || "General";
+                }
+
+                // Limpieza del precio
+                let rawPrice = item.precio || item.price || item.costo || item.monto || item.valor || "0";
+                const price = String(rawPrice).replace('$', '').trim();
+
+                // Estado / Stock
+                const stock = item.stock || item.disponibilidad || item.estado || "Disponible";
+
+                // Especificaciones o Almacenamiento
+                let specs = item.especificaciones || item.specs || item.descripcion || item.descripción || item.detalles || item.caracteristicas || item.características || "";
+                if (!specs) {
+                    const alm = item.almacenamiento || item.memoria || "";
+                    const ram = item.ram || "";
+                    if (alm || ram) {
+                        specs = [alm, ram].filter(Boolean).join(" / ");
+                    }
+                }
+
+                // Ruta o URL de Imagen
+                const image = item.imagen || item.image || item.foto || item.img || item.url || "";
 
                 return { name, category, price, stock, specs, image };
             });
