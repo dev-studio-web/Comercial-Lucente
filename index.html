@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comercial Lucente | Agente Autorizado Movistar</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -27,11 +26,9 @@
             }
         }
     </script>
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         .no-scrollbar::-webkit-scrollbar { display: none; }
@@ -40,10 +37,8 @@
 </head>
 <body class="bg-brand-dark text-slate-100 font-sans antialiased min-h-screen flex flex-col justify-between selection:bg-brand-accent selection:text-white">
 
-    <!-- HEADER SUPERIOR (Blanco Corporativo) -->
     <header class="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
-            <!-- Logo solo (Aislado, sin texto al lado) -->
             <a href="#" class="flex items-center group">
                 <img src="Img/logolucente.jpg" 
                      alt="Comercial Lucente" 
@@ -51,7 +46,6 @@
                      onerror="this.onerror=null; this.src='https://via.placeholder.com/200x60/0045A5/FFFFFF?text=Comercial+Lucente';">
             </a>
 
-            <!-- Agente Autorizado Movistar (Alineado a la derecha) -->
             <div class="flex items-center gap-2 bg-sky-50 border border-sky-200 text-brand-primary px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-bold shadow-sm">
                 <i class="fa-solid fa-circle-check text-brand-accent text-[11px]"></i>
                 <span>Agente Autorizado Movistar</span>
@@ -60,7 +54,6 @@
     </header>
 
     <main class="flex-grow">
-        <!-- HERO BANNER -->
         <section class="relative overflow-hidden bg-gradient-to-b from-brand-primary/20 via-brand-dark to-brand-dark py-10 sm:py-14 border-b border-slate-800/80">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
                 <span class="inline-block px-3 py-1 rounded-full bg-brand-primary/30 border border-brand-primary/50 text-brand-accent text-xs font-bold uppercase tracking-wider mb-4">
@@ -73,7 +66,6 @@
                     Equipos celulares, accesorios y servicios de telefonía. Compra directa y rápida a través de WhatsApp.
                 </p>
 
-                <!-- Badges de Confianza -->
                 <div class="mt-8 flex flex-wrap items-center justify-center gap-4 text-xs sm:text-sm text-slate-300">
                     <div class="flex items-center gap-2 bg-slate-800/60 px-3.5 py-2 rounded-lg border border-slate-700/50">
                         <i class="fa-solid fa-shield-halved text-brand-accent"></i> Recuperación de líneas
@@ -85,29 +77,22 @@
             </div>
         </section>
 
-        <!-- BARRA DE FILTROS Y CATEGORÍAS FIJA (STICKY AL HACER SCROLL) -->
         <div class="sticky top-20 z-30 bg-brand-dark/95 backdrop-blur-md border-b border-slate-800/80 shadow-lg py-3">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row gap-3 items-center justify-between">
-                <!-- Buscador -->
                 <div class="relative w-full md:w-80">
                     <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
                     <input type="text" id="search-input" placeholder="Buscar modelo, marca o accesorios..." class="w-full bg-slate-800/90 border border-slate-700 text-white placeholder-slate-400 text-sm rounded-xl pl-10 pr-4 py-2 focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition-all">
                 </div>
 
-                <!-- Botones Categorías -->
                 <div class="w-full md:w-auto overflow-x-auto no-scrollbar flex items-center gap-2 py-1" id="category-buttons">
-                    <!-- Cargado dinámicamente -->
-                </div>
+                    </div>
             </div>
         </div>
 
-        <!-- GRID DE PRODUCTOS -->
         <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                <!-- Cargado dinámicamente -->
-            </div>
+                </div>
 
-            <!-- EMPTY STATE -->
             <div id="empty-state" class="hidden text-center py-16">
                 <div class="w-16 h-16 bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-4 text-slate-500 text-2xl">
                     <i class="fa-solid fa-box-open"></i>
@@ -117,7 +102,6 @@
             </div>
         </section>
 
-        <!-- SECCIÓN CÓMO COMPRAR -->
         <section class="border-t border-slate-800/80 bg-slate-900/50 py-12">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h3 class="text-xl font-bold text-center text-white mb-8">¿Cómo realizar tu compra?</h3>
@@ -142,7 +126,6 @@
         </section>
     </main>
 
-    <!-- FOOTER -->
     <footer class="bg-slate-950 border-t border-slate-800 py-8 text-xs text-slate-400">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
             <div>
@@ -153,7 +136,6 @@
         </div>
     </footer>
 
-    <!-- BOTÓN FLOTANTE WHATSAPP -->
     <a id="floating-wa-btn" href="#" target="_blank" class="fixed bottom-6 right-6 z-50 bg-emerald-500 hover:bg-emerald-400 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-xl shadow-emerald-950/50 hover:scale-110 transition-all group">
         <i class="fa-brands fa-whatsapp text-3xl"></i>
         <span class="absolute right-16 bg-slate-900 text-white text-xs px-3 py-1.5 rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none border border-slate-700 shadow-md">
@@ -161,13 +143,11 @@
         </span>
     </a>
 
-    <!-- JAVASCRIPT -->
     <script>
         const PHONE_NUMBER = "584247631450";
-        const GOOGLE_SHEET_ID = ""; 
-        const SHEET_NAME = "Hoja1";
+        const GOOGLE_SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSovMeo7szQd-VrMB7-5IhX8gW08x-pQEtb7HjwPznO_X_t_QkR2KC8qfRIizVerfMt8_4EUhE6Jjx-/pub?output=csv';
 
-        // Catálogo local con las nuevas categorías integradas
+        // Catálogo local de respaldo por si falla la red o la hoja
         const localProducts = [
             {
                 name: "Samsung Galaxy S24 Ultra",
@@ -175,7 +155,7 @@
                 price: "1050",
                 stock: "Disponible",
                 specs: "256GB / 12GB RAM / Cámara 200MP",
-                image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&w=600&q=80"
+                image: "s24-ultra.jpg"
             },
             {
                 name: "iPhone 15 Pro Max",
@@ -183,7 +163,7 @@
                 price: "1190",
                 stock: "Pocas Unidades",
                 specs: "256GB / Titanium / Chip A17 Pro",
-                image: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=600&q=80"
+                image: "iphone15.jpg"
             },
             {
                 name: "Plan Movistar Plus 25GB",
@@ -191,7 +171,7 @@
                 price: "15",
                 stock: "Disponible",
                 specs: "25GB de Navegación + Minutos y SMS Ilimitados",
-                image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=600&q=80"
+                image: "plan25gb.jpg"
             },
             {
                 name: "Recarga de Saldo Movistar",
@@ -199,7 +179,7 @@
                 price: "5",
                 stock: "Inmediato",
                 specs: "Abono directo de saldo para líneas prepago y postpago",
-                image: "https://images.unsplash.com/photo-1556742049-0a67d9834b1d?auto=format&fit=crop&w=600&q=80"
+                image: "recarga.jpg"
             },
             {
                 name: "Audífonos Redmi Buds 5 Pro",
@@ -207,7 +187,7 @@
                 price: "42",
                 stock: "Disponible",
                 specs: "Cancelación de Ruido / Bluetooth 5.3",
-                image: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=600&q=80"
+                image: "redmi-buds5.jpg"
             }
         ];
 
@@ -233,15 +213,29 @@
             document.getElementById("floating-wa-btn").href = waUrl;
         }
 
+        // Convierte el nombre de la imagen a la carpeta local img/ si no es URL
+        function getImagePath(imgName) {
+            if (!imgName || imgName.trim() === "") {
+                return "https://via.placeholder.com/400x300/1E293B/FFFFFF?text=Sin+Imagen";
+            }
+            imgName = imgName.trim();
+            if (imgName.startsWith("http://") || imgName.startsWith("https://")) {
+                return imgName;
+            }
+            if (imgName.startsWith("img/")) {
+                return imgName;
+            }
+            return `img/${imgName}`;
+        }
+
         async function loadCatalog() {
-            if (GOOGLE_SHEET_ID && GOOGLE_SHEET_ID.trim() !== "") {
+            if (GOOGLE_SHEET_URL && GOOGLE_SHEET_URL.trim() !== "") {
                 try {
-                    const sheetUrl = `https://docs.google.com/spreadsheets/d/e/2PACX-1vSovMeo7szQd-VrMB7-5IhX8gW08x-pQEtb7HjwPznO_X_t_QkR2KC8qfRIizVerfMt8_4EUhE6Jjx-/pub?output=csv';
-                    const response = await fetch(sheetUrl);
+                    const response = await fetch(GOOGLE_SHEET_URL);
                     const csvText = await response.text();
-                    products = parseCSV(csvText); me 
+                    products = parseCSV(csvText);
                 } catch (error) {
-                    console.warn("Usando catálogo local:", error);
+                    console.warn("Usando catálogo local por error de conexión:", error);
                     products = localProducts;
                 }
             } else {
@@ -263,7 +257,7 @@
             
             return lines.slice(1).map(line => {
                 const values = line.match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g) || line.split(',');
-                const cleanValues = values.map(v => v.replace(/^"(.*)"$/, '$1').trim());
+                const cleanValues = values.map(v => (v || '').replace(/^"(.*)"$/, '$1').trim());
                 
                 let item = {};
                 headers.forEach((h, i) => {
@@ -276,7 +270,7 @@
                     price: item.precio || item.price || "0",
                     stock: item.stock || "Disponible",
                     specs: item.especificaciones || item.specs || item.descripcion || "",
-                    image: item.imagen || item.image || "https://via.placeholder.com/400x300/1E293B/FFFFFF?text=Producto"
+                    image: item.imagen || item.image || ""
                 };
             });
         }
@@ -339,15 +333,17 @@
             }
 
             emptyState.classList.add("hidden");
-            grid.innerHTML = filtered.map(p => `
+            grid.innerHTML = filtered.map(p => {
+                const imgSrc = getImagePath(p.image);
+                return `
                 <article class="bg-brand-card rounded-2xl overflow-hidden border border-slate-800 flex flex-col justify-between hover:border-slate-700 transition-all group">
                     <div>
                         <div class="relative h-48 w-full bg-slate-900 overflow-hidden">
                             <img 
-                                src="${p.image}" 
+                                src="${imgSrc}" 
                                 alt="${p.name}" 
                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                                onerror="this.onerror=null; this.src='https://via.placeholder.com/400x300/1E293B/FFFFFF?text=Producto';"
+                                onerror="this.onerror=null; this.src='https://via.placeholder.com/400x300/1E293B/FFFFFF?text=Imagen+no+encontrada';"
                             >
                             <span class="absolute top-3 left-3 bg-brand-dark/80 backdrop-blur-md text-brand-accent text-[10px] font-bold px-2.5 py-1 rounded-md border border-slate-700">
                                 ${p.category}
@@ -384,7 +380,8 @@
                         </a>
                     </div>
                 </article>
-            `).join("");
+                `;
+            }).join("");
         }
     </script>
 </body>
