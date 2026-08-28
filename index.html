@@ -236,10 +236,10 @@
         async function loadCatalog() {
             if (GOOGLE_SHEET_ID && GOOGLE_SHEET_ID.trim() !== "") {
                 try {
-                    const sheetUrl = `https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_NAME)}`;
+                    const sheetUrl = `https://docs.google.com/spreadsheets/d/e/2PACX-1vSovMeo7szQd-VrMB7-5IhX8gW08x-pQEtb7HjwPznO_X_t_QkR2KC8qfRIizVerfMt8_4EUhE6Jjx-/pub?output=csv';
                     const response = await fetch(sheetUrl);
                     const csvText = await response.text();
-                    products = parseCSV(csvText);
+                    products = parseCSV(csvText); me 
                 } catch (error) {
                     console.warn("Usando catálogo local:", error);
                     products = localProducts;
