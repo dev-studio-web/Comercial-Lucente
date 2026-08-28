@@ -227,21 +227,10 @@
             }
             return `img/${imgName}`;
         }
-<!-- JAVASCRIPT CORREGIDO Y ROBUSTO -->
+    <!-- JAVASCRIPT DEFINITIVO Y ANTIFALLOS -->
     <script>
         const PHONE_NUMBER = "584247631450";
         const GOOGLE_SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSovMeo7szQd-VrMB7-5IhX8gW08x-pQEtb7HjwPznO_X_t_QkR2KC8qfRIizVerfMt8_4EUhE6Jjx-/pub?output=csv';
-
-        const localProducts = [
-            {
-                name: "Samsung Galaxy S24 Ultra",
-                category: "Smartphones",
-                price: "1050",
-                stock: "Disponible",
-                specs: "256GB / 12GB RAM / Cámara 200MP",
-                image: "s24-ultra.jpg"
-            }
-        ];
 
         let products = [];
         let categories = ["Todos"];
@@ -253,87 +242,66 @@
             renderSkeleton();
             await loadCatalog();
 
-            document.getElementById("search-input").addEventListener("input", (e) => {
-                searchQuery = e.target.value.toLowerCase().trim();
-                renderProducts();
-            });
+            const searchInput = document.getElementById("search-input");
+            if (searchInput) {
+                searchInput.addEventListener("input", (e) => {
+                    searchQuery = (e.target.value || "").toLowerCase().trim();
+                    renderProducts();
+                });
+            }
         });
 
         function setupWhatsAppLinks() {
             const rawMsg = "Hola Comercial Lucente! 📱 Vengo de la vitrina web y me gustaría obtener información sobre sus equipos y servicios Movistar.";
-            const waUrl = `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(rawMsg)}`;
-            document.getElementById("floating-wa-btn").href = waUrl;
+            const waBtn = document.getElementById("floating-wa-btn");
+            if (waBtn) waBtn.href = `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(rawMsg)}`;
         }
 
         function getImagePath(imgName) {
-            if (!imgName || imgName.trim() === "") {
+            if (!imgName || String(imgName).trim() === "") {
                 return "https://via.placeholder.com/400x300/1E293B/FFFFFF?text=Sin+Imagen";
             }
-            imgName = imgName.trim();
-            if (imgName.startsWith("http://") || imgName.startsWith("https://")) {
-                return imgName;
-            }
-            if (imgName.startsWith("img/")) {
-                return imgName;
-            }
-            return `img/${imgName}`;
+            const cleanImg = String(imgName).trim();
+            if (cleanImg.startsWith("http://") || cleanImg.startsWith("https://")) return cleanImg;
+            if (cleanImg.startsWith("img/")) return cleanImg;
+            return `img/${cleanImg}`;
         }
 
         async function loadCatalog() {
-            if (GOOGLE_SHEET_URL && GOOGLE_SHEET_URL.trim() !== "") {
-                try {
-                    const response = await fetch(GOOGLE_SHEET_URL);
-                    const csvText = await response.text();
-                    products = parseCSV(csvText);
-                } catch (error) {
-                    console.warn("Usando catálogo local por error de conexión:", error);
-                    products = localProducts;
-                }
-            } else {
-                products = localProducts;
+            try {
+                const response = await fetch(GOOGLE_SHEET_URL);
+                if (!response.ok) throw new Error("Error en la respuesta de la red");
+                const csvText = await response.text();
+                products = parseCSV(csvText);
+            } catch (error) {
+                console.error("Error cargando desde Google Sheets:", error);
+                products = [];
             }
 
-            const uniqueCats = [...new Set(products.map(p => p.category).filter(Boolean))];
+            const uniqueCats = [...new Set(products.map(p => p.category).filter(c => c && String(c).trim() !== ""))];
             categories = ["Todos", ...uniqueCats];
 
             renderCategoryButtons();
             renderProducts();
         }
 
-        // Función para separar líneas CSV respetando comillas y espacios correctamente
-        function splitCSVLine(line) {
-            let result = [];
-            let current = '';
-            let inQuotes = false;
-            for (let i = 0; i < line.length; i++) {
-                let char = line[i];
-                if (char === '"') {
-                    inQuotes = !inQuotes;
-                } else if (char === ',' && !inQuotes) {
-                    result.push(current.trim().replace(/^"(.*)"$/, '$1'));
-                    current = '';
-                } else {
-                    current += char;
-                }
-            }
-            result.push(current.trim().replace(/^"(.*)"$/, '$1'));
-            return result;
-        }
-
         function parseCSV(text) {
-            const lines = text.split('\n').map(l => l.trim()).filter(l => l !== '');
-            if (lines.length < 2) return localProducts;
+            if (!text || text.trim() === "") return [];
 
-            const headers = splitCSVLine(lines[0]).map(h => h.toLowerCase());
+            const lines = text.replace(/\r/g, '').split('\n').filter(l => l.trim() !== '');
+            if (lines.length < 2) return [];
+
+            // Detecta automáticamente si la hoja usa ';' o ',' como separador
+            const delimiter = lines[0].includes(';') ? ';' : ',';
+            const headers = splitLine(lines[0], delimiter).map(h => h.toLowerCase().trim());
 
             return lines.slice(1).map(line => {
-                const values = splitCSVLine(line);
+                const values = splitLine(line, delimiter);
                 let item = {};
                 headers.forEach((h, i) => {
-                    item[h] = values[i] || '';
+                    item[h] = (values[i] || '').trim();
                 });
 
-                // Mapeo flexible de columnas para adaptarse a cualquier nombre de encabezado en tu Sheet
                 const name = item.nombre || item.name || item.producto || item.modelo || item.equipo || "Producto";
                 const category = item.categoria || item.category || item.categoría || item.marca || item.tipo || "General";
                 const price = item.precio || item.price || item.costo || item.monto || "0";
@@ -345,23 +313,45 @@
             });
         }
 
+        function splitLine(line, delimiter) {
+            let result = [];
+            let current = '';
+            let inQuotes = false;
+            for (let i = 0; i < line.length; i++) {
+                let char = line[i];
+                if (char === '"') {
+                    inQuotes = !inQuotes;
+                } else if (char === delimiter && !inQuotes) {
+                    result.push(current.replace(/^"(.*)"$/, '$1').trim());
+                    current = '';
+                } else {
+                    current += char;
+                }
+            }
+            result.push(current.replace(/^"(.*)"$/, '$1').trim());
+            return result;
+        }
+
         function renderSkeleton() {
             const grid = document.getElementById("products-grid");
-            grid.innerHTML = Array(4).fill(0).map(() => `
-                <div class="bg-brand-card rounded-2xl border border-slate-800 p-4 animate-pulse">
-                    <div class="h-48 bg-slate-800 rounded-xl mb-4"></div>
-                    <div class="h-4 bg-slate-800 rounded w-3/4 mb-2"></div>
-                    <div class="h-3 bg-slate-800 rounded w-1/2 mb-4"></div>
-                    <div class="h-10 bg-slate-800 rounded-xl"></div>
-                </div>
-            `).join("");
+            if (grid) {
+                grid.innerHTML = Array(4).fill(0).map(() => `
+                    <div class="bg-brand-card rounded-2xl border border-slate-800 p-4 animate-pulse">
+                        <div class="h-48 bg-slate-800 rounded-xl mb-4"></div>
+                        <div class="h-4 bg-slate-800 rounded w-3/4 mb-2"></div>
+                        <div class="h-3 bg-slate-800 rounded w-1/2 mb-4"></div>
+                        <div class="h-10 bg-slate-800 rounded-xl"></div>
+                    </div>
+                `).join("");
+            }
         }
 
         function renderCategoryButtons() {
             const container = document.getElementById("category-buttons");
+            if (!container) return;
             container.innerHTML = categories.map(cat => `
                 <button 
-                    onclick="filterCategory('${cat}')"
+                    onclick="filterCategory('${cat.replace(/'/g, "\\'")}')"
                     class="px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
                         selectedCategory === cat 
                         ? 'bg-brand-primary text-white shadow-md shadow-brand-primary/30' 
@@ -387,22 +377,28 @@
         function renderProducts() {
             const grid = document.getElementById("products-grid");
             const emptyState = document.getElementById("empty-state");
+            if (!grid) return;
 
             const filtered = products.filter(p => {
-                const matchesCat = selectedCategory === "Todos" || p.category.toLowerCase() === selectedCategory.toLowerCase();
-                const matchesSearch = p.name.toLowerCase().includes(searchQuery) || 
-                                      p.specs.toLowerCase().includes(searchQuery) ||
-                                      p.category.toLowerCase().includes(searchQuery);
+                const catStr = String(p.category || "").toLowerCase();
+                const selStr = String(selectedCategory || "").toLowerCase();
+                const nameStr = String(p.name || "").toLowerCase();
+                const specStr = String(p.specs || "").toLowerCase();
+
+                const matchesCat = selectedCategory === "Todos" || catStr === selStr;
+                const matchesSearch = nameStr.includes(searchQuery) || 
+                                      specStr.includes(searchQuery) ||
+                                      catStr.includes(searchQuery);
                 return matchesCat && matchesSearch;
             });
 
             if (filtered.length === 0) {
                 grid.innerHTML = "";
-                emptyState.classList.remove("hidden");
+                if (emptyState) emptyState.classList.remove("hidden");
                 return;
             }
 
-            emptyState.classList.add("hidden");
+            if (emptyState) emptyState.classList.add("hidden");
             grid.innerHTML = filtered.map(p => {
                 const imgSrc = getImagePath(p.image);
                 return `
