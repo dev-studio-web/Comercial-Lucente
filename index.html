@@ -37,13 +37,14 @@
 </head>
 <body class="bg-brand-dark text-slate-100 font-sans antialiased min-h-screen flex flex-col justify-between selection:bg-brand-accent selection:text-white">
 
+    <!-- HEADER -->
     <header class="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
             <a href="#" class="flex items-center group">
                 <img src="Img/logolucente.jpg" 
                      alt="Comercial Lucente" 
                      class="h-10 sm:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105" 
-                     onerror="this.onerror=null; this.src='https://via.placeholder.com/200x60/0045A5/FFFFFF?text=Comercial+Lucente';">
+                     onerror="this.onerror=null; this.src='img/logolucente.jpg';">
             </a>
 
             <div class="flex items-center gap-2 bg-sky-50 border border-sky-200 text-brand-primary px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-bold shadow-sm">
@@ -54,6 +55,7 @@
     </header>
 
     <main class="flex-grow">
+        <!-- HERO SECTION -->
         <section class="relative overflow-hidden bg-gradient-to-b from-brand-primary/20 via-brand-dark to-brand-dark py-10 sm:py-14 border-b border-slate-800/80">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
                 <span class="inline-block px-3 py-1 rounded-full bg-brand-primary/30 border border-brand-primary/50 text-brand-accent text-xs font-bold uppercase tracking-wider mb-4">
@@ -67,16 +69,20 @@
                 </p>
 
                 <div class="mt-8 flex flex-wrap items-center justify-center gap-4 text-xs sm:text-sm text-slate-300">
-                    <div class="flex items-center gap-2 bg-slate-800/60 px-3.5 py-2 rounded-lg border border-slate-700/50">
-                        <i class="fa-solid fa-shield-halved text-brand-accent"></i> Recuperación de líneas
-                    </div>
-                    <div class="flex items-center gap-2 bg-slate-800/60 px-3.5 py-2 rounded-lg border border-slate-700/50">
-                        <i class="fa-solid fa-sim-card text-brand-accent"></i> SimCard y eSIM 
-                    </div>
+                    <button onclick="filterCategory('Planes Movistar')" class="flex items-center gap-2 bg-slate-800/80 hover:bg-slate-700 px-4 py-2 rounded-lg border border-slate-700 transition-all cursor-pointer">
+                        <i class="fa-solid fa-sim-card text-brand-accent"></i> Planes Movistar
+                    </button>
+                    <button onclick="filterCategory('Recargas')" class="flex items-center gap-2 bg-slate-800/80 hover:bg-slate-700 px-4 py-2 rounded-lg border border-slate-700 transition-all cursor-pointer">
+                        <i class="fa-solid fa-bolt text-brand-accent"></i> Recargas de Saldo
+                    </button>
+                    <button onclick="filterCategory('Servicios')" class="flex items-center gap-2 bg-slate-800/80 hover:bg-slate-700 px-4 py-2 rounded-lg border border-slate-700 transition-all cursor-pointer">
+                        <i class="fa-solid fa-shield-halved text-brand-accent"></i> Recuperación / eSIM
+                    </button>
                 </div>
             </div>
         </section>
 
+        <!-- BARRA DE BÚSQUEDA Y CATEGORÍAS -->
         <div class="sticky top-20 z-30 bg-brand-dark/95 backdrop-blur-md border-b border-slate-800/80 shadow-lg py-3">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row gap-3 items-center justify-between">
                 <div class="relative w-full md:w-80">
@@ -89,6 +95,7 @@
             </div>
         </div>
 
+        <!-- REJILLA DE PRODUCTOS -->
         <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             </div>
@@ -102,6 +109,7 @@
             </div>
         </section>
 
+        <!-- PASOS DE COMPRA -->
         <section class="border-t border-slate-800/80 bg-slate-900/50 py-12">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h3 class="text-xl font-bold text-center text-white mb-8">¿Cómo realizar tu compra?</h3>
@@ -126,6 +134,7 @@
         </section>
     </main>
 
+    <!-- FOOTER -->
     <footer class="bg-slate-950 border-t border-slate-800 py-8 text-xs text-slate-400">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
             <div>
@@ -136,6 +145,7 @@
         </div>
     </footer>
 
+    <!-- BOTÓN FLOTANTE WHATSAPP -->
     <a id="floating-wa-btn" href="#" target="_blank" class="fixed bottom-6 right-6 z-50 bg-emerald-500 hover:bg-emerald-400 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-xl shadow-emerald-950/50 hover:scale-110 transition-all group">
         <i class="fa-brands fa-whatsapp text-3xl"></i>
         <span class="absolute right-16 bg-slate-900 text-white text-xs px-3 py-1.5 rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none border border-slate-700 shadow-md">
@@ -147,6 +157,34 @@
     <script>
         const PHONE_NUMBER = "584247631450";
         const GOOGLE_SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSovMeo7szQd-VrMB7-5IhX8gW08x-pQEtb7HjwPznO_X_t_QkR2KC8qfRIizVerfMt8_4EUhE6Jjx-/pub?output=csv';
+
+        // Servicios Movistar fijos de respaldo
+        const defaultServices = [
+            {
+                name: "Planes Movistar Plus",
+                category: "Planes Movistar",
+                price: "Consultar",
+                stock: "Disponible",
+                specs: "Planes de datos 10GB, 25GB y 50GB con minutos y SMS incluidos.",
+                image: "plan-movistar.jpg"
+            },
+            {
+                name: "Recargas de Saldo Movistar",
+                category: "Recargas",
+                price: "Desde $1",
+                stock: "Inmediato",
+                specs: "Abono directo de saldo para líneas prepago y postpago.",
+                image: "recargas.jpg"
+            },
+            {
+                name: "Recuperación de Línea / eSIM",
+                category: "Servicios",
+                price: "Consultar",
+                stock: "Disponible",
+                specs: "Reemplazo de SimCard por robo/pérdida o migración a eSIM.",
+                image: "esim.jpg"
+            }
+        ];
 
         let products = [];
         let categories = ["Todos"];
@@ -173,28 +211,58 @@
             if (waBtn) waBtn.href = `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(rawMsg)}`;
         }
 
+        // Manejador inteligente de rutas de imágenes (Resuelve errores Mayúsculas/Minúsculas en GitHub)
         function getImagePath(imgName) {
             if (!imgName || String(imgName).trim() === "") {
                 return "https://via.placeholder.com/400x300/1E293B/FFFFFF?text=Sin+Imagen";
             }
             const cleanImg = String(imgName).trim();
             if (cleanImg.startsWith("http://") || cleanImg.startsWith("https://")) return cleanImg;
-            if (cleanImg.startsWith("img/")) return cleanImg;
-            return `img/${cleanImg}`;
+            if (cleanImg.startsWith("Img/") || cleanImg.startsWith("img/")) return cleanImg;
+            return `Img/${cleanImg}`;
+        }
+
+        function handleImageError(imgElement, originalImageName) {
+            if (!imgElement.dataset.retried) {
+                imgElement.dataset.retried = "1";
+                // Intenta alternar entre img/ e Img/
+                const cleanName = String(originalImageName).replace(/^(img|Img)\//i, '').trim();
+                imgElement.src = `img/${cleanName}`;
+            } else if (imgElement.dataset.retried === "1") {
+                imgElement.dataset.retried = "2";
+                // Intenta buscar directamente en la raíz
+                const cleanName = String(originalImageName).replace(/^(img|Img)\//i, '').trim();
+                imgElement.src = cleanName;
+            } else {
+                imgElement.onerror = null;
+                imgElement.src = "https://via.placeholder.com/400x300/1E293B/FFFFFF?text=Sin+Imagen";
+            }
         }
 
         async function loadCatalog() {
+            let sheetProducts = [];
             try {
                 const response = await fetch(GOOGLE_SHEET_URL);
-                if (!response.ok) throw new Error("Error en la petición");
-                const csvText = await response.text();
-                products = parseCSV(csvText);
+                if (response.ok) {
+                    const csvText = await response.text();
+                    sheetProducts = parseCSV(csvText);
+                }
             } catch (error) {
-                console.error("Error cargando datos de Google Sheets:", error);
-                products = [];
+                console.error("Error cargando Google Sheets:", error);
             }
 
-            // Extraer categorías únicas de la hoja
+            // Unir productos de Sheets con los Servicios Movistar fijos
+            products = [...sheetProducts];
+
+            // Inyectar servicios de respaldos si no existen en Sheets
+            defaultServices.forEach(srv => {
+                const exists = products.some(p => p.category.toLowerCase() === srv.category.toLowerCase());
+                if (!exists) {
+                    products.push(srv);
+                }
+            });
+
+            // Extraer categorías únicas
             const rawCats = products.map(p => p.category).filter(c => c && String(c).trim() !== "");
             const uniqueCats = [...new Set(rawCats)];
             categories = ["Todos", ...uniqueCats];
@@ -206,12 +274,10 @@
         function parseCSV(text) {
             if (!text || text.trim() === "") return [];
 
-            // Eliminar BOM UTF-8 que suele colocar Google Sheets al publicar CSV
             const cleanText = text.replace(/^\uFEFF/, '');
             const lines = cleanText.replace(/\r/g, '').split('\n').filter(l => l.trim() !== '');
             if (lines.length < 2) return [];
 
-            // Detectar automáticamente si usa punto y coma (;) o coma (,)
             const firstLine = lines[0];
             let delimiter = ',';
             if (firstLine.includes(';')) delimiter = ';';
@@ -229,44 +295,36 @@
                 const marca = item.marca || item.brand || item.marcas || "";
                 const modelo = item.modelo || item.model || "";
 
-                // Construcción inteligente del nombre
                 let name = item.nombre || item.name || item.producto || item.equipo || "";
                 if (!name) {
-                    if (marca && modelo) {
-                        name = `${marca} ${modelo}`;
-                    } else if (modelo) {
-                        name = modelo;
-                    } else if (marca) {
-                        name = marca;
-                    } else {
-                        name = "Producto";
-                    }
+                    if (marca && modelo) name = `${marca} ${modelo}`;
+                    else if (modelo) name = modelo;
+                    else if (marca) name = marca;
+                    else name = "Producto";
                 }
 
-                // Determinación de la Categoría
-                let category = item.categoria || item.category || item.categoría || item.tipo || item.seccion || item.sección || item.linea || item.línea || "";
+                let category = item.categoria || item.category || item.categoría || item.tipo || item.seccion || item.sección || "";
                 if (!category) {
-                    category = marca || "General";
+                    category = marca || "SmartPhone";
                 }
 
-                // Limpieza del precio
-                let rawPrice = item.precio || item.price || item.costo || item.monto || item.valor || "0";
+                let rawPrice = item.precio || item.price || item.costo || item.monto || "0";
                 const price = String(rawPrice).replace('$', '').trim();
 
-                // Estado / Stock
-                const stock = item.stock || item.disponibilidad || item.estado || "Disponible";
+                const stock = item.stock || item.disponibilidad || item.estado || "En stock";
 
-                // Especificaciones o Almacenamiento
-                let specs = item.especificaciones || item.specs || item.descripcion || item.descripción || item.detalles || item.caracteristicas || item.características || "";
+                let specs = item.especificaciones || item.specs || item.descripcion || item.descripción || item.detalles || "";
                 if (!specs) {
                     const alm = item.almacenamiento || item.memoria || "";
                     const ram = item.ram || "";
-                    if (alm || ram) {
-                        specs = [alm, ram].filter(Boolean).join(" / ");
-                    }
+                    const bat = item.bateria || item.batería || "";
+                    let parts = [];
+                    if (bat) parts.push(`Batería: ${bat}`);
+                    if (ram) parts.push(`${ram} RAM`);
+                    if (alm) parts.push(`${alm} Almacenamiento`);
+                    specs = parts.join(" / ");
                 }
 
-                // Ruta o URL de Imagen
                 const image = item.imagen || item.image || item.foto || item.img || item.url || "";
 
                 return { name, category, price, stock, specs, image };
@@ -327,6 +385,10 @@
             selectedCategory = cat;
             renderCategoryButtons();
             renderProducts();
+            
+            // Scroll suave hacia los productos
+            const grid = document.getElementById("products-grid");
+            if (grid) grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
         function getBuyLink(product) {
@@ -361,6 +423,9 @@
             if (emptyState) emptyState.classList.add("hidden");
             grid.innerHTML = filtered.map(p => {
                 const imgSrc = getImagePath(p.image);
+                const isNumericPrice = !isNaN(p.price) && p.price !== "";
+                const displayPrice = isNumericPrice ? `$${p.price}` : p.price;
+
                 return `
                 <article class="bg-brand-card rounded-2xl overflow-hidden border border-slate-800 flex flex-col justify-between hover:border-slate-700 transition-all group">
                     <div>
@@ -369,7 +434,7 @@
                                 src="${imgSrc}" 
                                 alt="${p.name}" 
                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                                onerror="this.onerror=null; this.src='https://via.placeholder.com/400x300/1E293B/FFFFFF?text=Sin+Imagen';"
+                                onerror="handleImageError(this, '${p.image}')"
                             >
                             <span class="absolute top-3 left-3 bg-brand-dark/80 backdrop-blur-md text-brand-accent text-[10px] font-bold px-2.5 py-1 rounded-md border border-slate-700">
                                 ${p.category}
@@ -392,7 +457,7 @@
                                 <i class="fa-solid fa-circle text-[8px] mr-1"></i>${p.stock}
                             </span>
                             <span class="text-xl font-extrabold text-white">
-                                $${p.price}
+                                ${displayPrice}
                             </span>
                         </div>
 
