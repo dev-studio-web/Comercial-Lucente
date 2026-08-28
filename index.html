@@ -71,7 +71,7 @@
                         <i class="fa-solid fa-shield-halved text-brand-accent"></i> Recuperación de líneas
                     </div>
                     <div class="flex items-center gap-2 bg-slate-800/60 px-3.5 py-2 rounded-lg border border-slate-700/50">
-                        <i class="fa-solid fa-sim-card text-brand-accent"></i> SimCard, eSIM y Recargas
+                        <i class="fa-solid fa-sim-card text-brand-accent"></i> SimCard y eSIM 
                     </div>
                 </div>
             </div>
@@ -227,6 +227,57 @@
             }
             return `img/${imgName}`;
         }
+<!-- JAVASCRIPT CORREGIDO Y ROBUSTO -->
+    <script>
+        const PHONE_NUMBER = "584247631450";
+        const GOOGLE_SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSovMeo7szQd-VrMB7-5IhX8gW08x-pQEtb7HjwPznO_X_t_QkR2KC8qfRIizVerfMt8_4EUhE6Jjx-/pub?output=csv';
+
+        const localProducts = [
+            {
+                name: "Samsung Galaxy S24 Ultra",
+                category: "Smartphones",
+                price: "1050",
+                stock: "Disponible",
+                specs: "256GB / 12GB RAM / Cámara 200MP",
+                image: "s24-ultra.jpg"
+            }
+        ];
+
+        let products = [];
+        let categories = ["Todos"];
+        let selectedCategory = "Todos";
+        let searchQuery = "";
+
+        document.addEventListener("DOMContentLoaded", async () => {
+            setupWhatsAppLinks();
+            renderSkeleton();
+            await loadCatalog();
+
+            document.getElementById("search-input").addEventListener("input", (e) => {
+                searchQuery = e.target.value.toLowerCase().trim();
+                renderProducts();
+            });
+        });
+
+        function setupWhatsAppLinks() {
+            const rawMsg = "Hola Comercial Lucente! 📱 Vengo de la vitrina web y me gustaría obtener información sobre sus equipos y servicios Movistar.";
+            const waUrl = `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(rawMsg)}`;
+            document.getElementById("floating-wa-btn").href = waUrl;
+        }
+
+        function getImagePath(imgName) {
+            if (!imgName || imgName.trim() === "") {
+                return "https://via.placeholder.com/400x300/1E293B/FFFFFF?text=Sin+Imagen";
+            }
+            imgName = imgName.trim();
+            if (imgName.startsWith("http://") || imgName.startsWith("https://")) {
+                return imgName;
+            }
+            if (imgName.startsWith("img/")) {
+                return imgName;
+            }
+            return `img/${imgName}`;
+        }
 
         async function loadCatalog() {
             if (GOOGLE_SHEET_URL && GOOGLE_SHEET_URL.trim() !== "") {
@@ -249,29 +300,48 @@
             renderProducts();
         }
 
+        // Función para separar líneas CSV respetando comillas y espacios correctamente
+        function splitCSVLine(line) {
+            let result = [];
+            let current = '';
+            let inQuotes = false;
+            for (let i = 0; i < line.length; i++) {
+                let char = line[i];
+                if (char === '"') {
+                    inQuotes = !inQuotes;
+                } else if (char === ',' && !inQuotes) {
+                    result.push(current.trim().replace(/^"(.*)"$/, '$1'));
+                    current = '';
+                } else {
+                    current += char;
+                }
+            }
+            result.push(current.trim().replace(/^"(.*)"$/, '$1'));
+            return result;
+        }
+
         function parseCSV(text) {
-            const lines = text.split('\n').filter(l => l.trim() !== '');
+            const lines = text.split('\n').map(l => l.trim()).filter(l => l !== '');
             if (lines.length < 2) return localProducts;
 
-            const headers = lines[0].split(',').map(h => h.replace(/^"(.*)"$/, '$1').trim().toLowerCase());
-            
+            const headers = splitCSVLine(lines[0]).map(h => h.toLowerCase());
+
             return lines.slice(1).map(line => {
-                const values = line.match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g) || line.split(',');
-                const cleanValues = values.map(v => (v || '').replace(/^"(.*)"$/, '$1').trim());
-                
+                const values = splitCSVLine(line);
                 let item = {};
                 headers.forEach((h, i) => {
-                    item[h] = cleanValues[i] || '';
+                    item[h] = values[i] || '';
                 });
 
-                return {
-                    name: item.nombre || item.name || "Producto sin nombre",
-                    category: item.categoria || item.category || "General",
-                    price: item.precio || item.price || "0",
-                    stock: item.stock || "Disponible",
-                    specs: item.especificaciones || item.specs || item.descripcion || "",
-                    image: item.imagen || item.image || ""
-                };
+                // Mapeo flexible de columnas para adaptarse a cualquier nombre de encabezado en tu Sheet
+                const name = item.nombre || item.name || item.producto || item.modelo || item.equipo || "Producto";
+                const category = item.categoria || item.category || item.categoría || item.marca || item.tipo || "General";
+                const price = item.precio || item.price || item.costo || item.monto || "0";
+                const stock = item.stock || item.disponibilidad || "Disponible";
+                const specs = item.especificaciones || item.specs || item.descripcion || item.descripción || item.detalles || item.almacenamiento || "";
+                const image = item.imagen || item.image || item.foto || item.url || "";
+
+                return { name, category, price, stock, specs, image };
             });
         }
 
@@ -310,7 +380,7 @@
         }
 
         function getBuyLink(product) {
-            const rawMessage = `Hola Comercial Lucente! \uD83D\uDCF1 Vengo de la vitrina web y quiero consultar sobre lo siguiente:\n\n\u25C6 *Producto/Servicio:* ${product.name}\n\u25C6 *Precio:* $${product.price}\n\u25C6 *Detalles:* ${product.specs}\n\n\u00BFTienen disponibilidad para realizar el pedido?`;
+            const rawMessage = `Hola Comercial Lucente! 📱 Vengo de la vitrina web y quiero consultar sobre lo siguiente:\n\n◆ *Producto/Servicio:* ${product.name}\n◆ *Precio:* $${product.price}\n◆ *Detalles:* ${product.specs}\n\n¿Tienen disponibilidad para realizar el pedido?`;
             return `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(rawMessage)}`;
         }
 
@@ -319,7 +389,7 @@
             const emptyState = document.getElementById("empty-state");
 
             const filtered = products.filter(p => {
-                const matchesCat = selectedCategory === "Todos" || p.category === selectedCategory;
+                const matchesCat = selectedCategory === "Todos" || p.category.toLowerCase() === selectedCategory.toLowerCase();
                 const matchesSearch = p.name.toLowerCase().includes(searchQuery) || 
                                       p.specs.toLowerCase().includes(searchQuery) ||
                                       p.category.toLowerCase().includes(searchQuery);
@@ -343,7 +413,7 @@
                                 src="${imgSrc}" 
                                 alt="${p.name}" 
                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                                onerror="this.onerror=null; this.src='https://via.placeholder.com/400x300/1E293B/FFFFFF?text=Imagen+no+encontrada';"
+                                onerror="this.onerror=null; this.src='https://via.placeholder.com/400x300/1E293B/FFFFFF?text=Sin+Imagen';"
                             >
                             <span class="absolute top-3 left-3 bg-brand-dark/80 backdrop-blur-md text-brand-accent text-[10px] font-bold px-2.5 py-1 rounded-md border border-slate-700">
                                 ${p.category}
